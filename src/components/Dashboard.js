@@ -14,6 +14,8 @@ class Dashboard extends Component {
 
   render() {
     const { answeredIds, questionIds } = this.props;
+    // const unansweredIds = answeredIds ? questionIds.filter(answeredIds) : null;
+    // console.log(unansweredIds)
 
     return (
       <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
