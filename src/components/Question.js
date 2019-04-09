@@ -15,8 +15,9 @@ class Question extends Component {
   };
 
   render() {
-    const { question, poll } = this.props;
-    const { author, avatar, timestamp, optionOne, optionTwo, id } = question;
+    const { question, poll, user } = this.props;
+    const { timestamp, optionOne, optionTwo, id } = question;
+    const { name, avatarURL } = user;
 
     if (question === null) {
       return <p>This Question doesn't exist</p>;
@@ -34,8 +35,8 @@ class Question extends Component {
           margin="small"
         >
           <Box direction="column" className="credentials">
-            <img src={avatar} alt={`Avatar of ${author}`} className="avatar" />
-            <span>{author}</span>
+            <img src={avatarURL} alt={`Avatar of ${name}`} className="avatar" />
+            <span>{name}</span>
             <div>{formatDate(timestamp)}</div>
           </Box>
 
@@ -70,10 +71,13 @@ class Question extends Component {
 
 function mapStateToProps({ users, questions, authedUser }, { id }) {
   const question = questions[id];
+  const user = users && users[question.author];
+  console.log(user);
 
   return {
     authedUser,
-    question: question ? formatQuestion(question, users[question.author]) : null
+    question,
+    user
   };
 }
 

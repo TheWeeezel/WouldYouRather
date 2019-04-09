@@ -1,4 +1,4 @@
-import { saveQuestionAnswer } from "../utils/api";
+import { _saveQuestionAnswer } from "../utils/_DATA";
 import { showLoading, hideLoading } from "react-redux-loading";
 
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
@@ -38,7 +38,7 @@ export function handleSaveQuestionAnswer(question, answer) {
 
     dispatch(showLoading());
 
-    return saveQuestionAnswer(payload)
+    return _saveQuestionAnswer(payload)
       .then(() => dispatch(answerQuestionSuccess(payload)))
       .then(() => dispatch(hideLoading()))
       .catch(() =>

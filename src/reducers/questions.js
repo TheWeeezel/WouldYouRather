@@ -13,17 +13,7 @@ export default function questions(state = {}, action) {
     case ANSWER_QUESTION_SUCCESS: {
       return {
         ...state,
-
-        ...questions,
-        [action.qid]: {
-          ...questions[action.qid],
-          [action.answer]: {
-            ...questions[action.qid][action.answer],
-            votes: questions[action.qid][action.answer].votes.concat([
-              action.authedUser
-            ])
-          }
-        }
+        ...action.payload
       };
     }
     default:
