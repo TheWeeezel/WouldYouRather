@@ -14,8 +14,10 @@ class Dashboard extends Component {
 
   render() {
     const { answeredIds, questionIds } = this.props;
-    // const unansweredIds = answeredIds ? questionIds.filter(answeredIds) : null;
-    // console.log(unansweredIds)
+
+    const unansweredIds = questionIds.filter(f =>
+      answeredIds ? !answeredIds.includes(f) : null
+    );
 
     return (
       <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
@@ -23,13 +25,18 @@ class Dashboard extends Component {
           <Heading level="3" margin="none">
             Would you rather?
           </Heading>
-          <button onClick={() => this.handleClick(true)}>Unanswered</button>
-          <button onClick={() => this.handleClick(false)}>Answered</button>
+          <Box flex direction="row" align="center" pad="medium">
+            <Button label="Unanswered" onClick={() => this.handleClick(true)} />
+            <Button label="Answered" onClick={() => this.handleClick(false)} />
+          </Box>
+
           <div>
             {this.state.unanswered
-              ? questionIds.map(id => <Question id={id} />)
+              ? unansweredIds.map((id, i) => <Question key={i} id={id} />)
               : answeredIds
-              ? this.props.answeredIds.map(id => <Question id={id} />)
+              ? this.props.answeredIds.map((id, i) => (
+                  <Question key={i} id={id} />
+                ))
               : null}
           </div>
         </Box>

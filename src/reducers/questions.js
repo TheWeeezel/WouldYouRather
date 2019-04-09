@@ -1,4 +1,7 @@
-import { RECEIVE_QUESTIONS } from "../actions/questions";
+import {
+  RECEIVE_QUESTIONS,
+  ANSWER_QUESTION_SUCCESS
+} from "../actions/questions";
 
 export default function users(state = {}, action) {
   switch (action.type) {
@@ -7,6 +10,12 @@ export default function users(state = {}, action) {
         ...state,
         ...action.questions
       };
+    case ANSWER_QUESTION_SUCCESS: {
+      return {
+        ...state,
+        ...action
+      };
+    }
     default:
       return state;
   }
