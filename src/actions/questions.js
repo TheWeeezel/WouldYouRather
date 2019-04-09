@@ -39,7 +39,7 @@ export function handleSaveQuestionAnswer(question, answer) {
     dispatch(showLoading());
 
     return _saveQuestionAnswer(payload)
-      .then(payload => dispatch(answerQuestionSuccess(payload)))
+      .then(() => dispatch(answerQuestionSuccess(payload)))
       .then(() => dispatch(hideLoading()))
       .catch(() =>
         dispatch(answerQuestionFailure(console.log("Something went wrong")))

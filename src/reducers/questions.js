@@ -13,7 +13,13 @@ export default function(state = {}, action) {
     case ANSWER_QUESTION_SUCCESS: {
       return {
         ...state,
-        ...action.payload
+        [action.payload.authedUser]: {
+          ...state.users[action.payload.authedUser],
+          answers: {
+            ...state.users[action.payload.authedUser].answers,
+            [action.payload.qid]: action.payload.answer
+          }
+        }
       };
     }
     default:

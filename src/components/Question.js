@@ -72,7 +72,6 @@ class Question extends Component {
 function mapStateToProps({ users, questions, authedUser }, { id }) {
   const question = questions[id];
   const user = users && users[question.author];
-  console.log(user);
 
   return {
     authedUser,
