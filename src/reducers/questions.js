@@ -10,18 +10,18 @@ export default function(state = {}, action) {
         ...state,
         ...action.questions
       };
-    case ANSWER_QUESTION_SUCCESS: {
-      return {
-        ...state,
-        [action.payload.authedUser]: {
-          ...state.users[action.payload.authedUser],
-          answers: {
-            ...state.users[action.payload.authedUser].answers,
-            [action.payload.qid]: action.payload.answer
+    case ANSWER_QUESTION_SUCCESS:
+      return Object.assign({}, state, {
+        users: {
+          ...state.users,
+          [action.payload.authedUser]: {
+            ...state.users[action.payload.authedUser],
+            answers: {
+              [action.payload.qid]: action.payload.answer
+            }
           }
         }
-      };
-    }
+      });
     default:
       return state;
   }
