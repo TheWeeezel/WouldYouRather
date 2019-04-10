@@ -4,13 +4,13 @@ import { Redirect, BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { handleInitialData } from "../actions/shared";
 import LoadingBar from "react-redux-loading";
-import Auth from "../utils/auth";
 import Nav from "./Nav";
 import Dashboard from "./Dashboard";
 import Poll from "./Poll";
 import NewQuestion from "./NewQuestion";
 import Leaderboard from "./Leaderboard";
 import Login from "./Login";
+import Error from "./Error";
 
 class App extends Component {
   componentDidMount() {
@@ -27,6 +27,9 @@ class App extends Component {
           size: "14px",
           height: "20px"
         }
+      },
+      anchor: {
+        fontWeight: "400"
       }
     };
 
@@ -34,18 +37,17 @@ class App extends Component {
       <Router>
         <Grommet theme={theme} full>
           <LoadingBar />
-          <div className="container">
-            <Nav />
-            {this.props.loading === true ? null : (
-              <Box pad="xlarge">
-                <Route path="/" exact component={Dashboard} />
-                <Route path="/login" component={Login} />
-                <Route path="/poll/:id" component={Auth(Poll)} />
-                <Route path="/new" component={NewQuestion} />
-                <Route path="/leaderboard" component={Leaderboard} />
-              </Box>
-            )}
-          </div>
+          <Nav />
+          {this.props.loading === true ? null : (
+            <Box pad="medium">
+              <Route path="/" exact component={Dashboard} />
+              <Route path="/login" component={Login} />
+              <Route path="/poll/:id" component={Poll} />
+              <Route path="/new" component={NewQuestion} />
+              <Route path="/leaderboard" component={Leaderboard} />
+              <Route path="/404" component={Error} />
+            </Box>
+          )}
         </Grommet>
       </Router>
     );

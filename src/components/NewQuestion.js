@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Box, Button, Heading, TextInput } from "grommet";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 
 import { handleSaveQuestion } from "../actions/questions";
 
@@ -31,47 +31,60 @@ class NewQuestion extends Component {
   };
 
   render() {
+    const { authedUser } = this.props;
+    if (!authedUser[0]) {
+      return <Redirect to="/Login" />;
+    }
     return (
-      <Box
-        flex
-        pad="medium"
-        margin="medium"
-        border={{ color: "brand", size: "small" }}
-        elevation="small"
-        direction="column"
-        fill={false}
-        round="small"
-      >
+      <Box flex direction="column" fill={false}>
         <Heading alignSelf="center" margin="small">
           Would you rather?
         </Heading>
-        <Box flex pad="medium">
-          <TextInput
-            size="medium"
-            type="text"
-            value={this.state.optionOneText}
-            placeholder="... that"
-            onChange={e => this.setState({ optionOneText: e.target.value })}
-          />
-          <TextInput
-            size="medium"
-            type="text"
-            value={this.state.optionTwoText}
-            placeholder="... this"
-            onChange={e => this.setState({ optionTwoText: e.target.value })}
-          />
+        <Box align="center" flex justify="center">
+          <Box
+            flex
+            border={{ color: "brand", size: "small" }}
+            pad="medium"
+            elevation="medium"
+            animation="fadeIn"
+            fill={false}
+            round="small"
+            width="large"
+            margin="medium"
+          >
+            <TextInput
+              size="medium"
+              type="text"
+              value={this.state.optionOneText}
+              placeholder="... that"
+              onChange={e => this.setState({ optionOneText: e.target.value })}
+            />
+            <TextInput
+              size="medium"
+              type="text"
+              value={this.state.optionTwoText}
+              placeholder="... this"
+              onChange={e => this.setState({ optionTwoText: e.target.value })}
+            />
 
-          <Button
-            margin="small"
-            alignSelf="center"
-            label="Create"
-            type="submit"
-            onClick={event => this.handleSubmit(event)}
-          />
+            <Button
+              margin="small"
+              alignSelf="center"
+              label="Create"
+              type="submit"
+              onClick={event => this.handleSubmit(event)}
+            />
+          </Box>
         </Box>
       </Box>
     );
   }
 }
 
-export default withRouter(connect()(NewQuestion));
+function mapStateToProps({ authedUser }) {
+  return {
+    authedUser
+  };
+}
+
+export default withRouter(connect(mapStateToProps)(NewQuestion));

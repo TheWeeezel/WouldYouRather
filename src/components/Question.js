@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Box, Button } from "grommet";
+import { Box, Text, Heading } from "grommet";
 import { Redirect, Link, withRouter } from "react-router-dom";
 
 import { handleSaveQuestionAnswer } from "../actions/questions";
@@ -20,7 +20,7 @@ class Question extends Component {
     const { name, avatarURL } = user;
 
     return (
-      <Link to={`/poll/${id}`}>
+      <Link to={`/poll/${id}`} style={{ textDecoration: "none" }}>
         <Box
           direction="row"
           border={{ color: "brand", size: "small" }}
@@ -30,17 +30,19 @@ class Question extends Component {
           fill={false}
           round="small"
           margin="medium"
+          width="large"
         >
-          <Box direction="column" className="credentials">
+          <Box direction="column" justify="center" align="center">
             <img src={avatarURL} alt={`Avatar of ${name}`} className="avatar" />
             <span>{name}</span>
             <div>{formatDate(timestamp)}</div>
           </Box>
 
-          <div className="question-preview">
-            <div>{optionOne.text}</div>
-            <div>{optionTwo.text}</div>
-          </div>
+          <Box pad="medium">
+            <Heading level="4">Choose:</Heading>
+            <Text>{optionOne.text}</Text>
+            <Text>{optionTwo.text}</Text>
+          </Box>
         </Box>
       </Link>
     );

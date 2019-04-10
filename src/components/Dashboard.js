@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Box, Button, Heading, Grommet } from "grommet";
 import Question from "./Question";
+import { Redirect } from "react-router-dom";
 
 class Dashboard extends Component {
   state = {
@@ -13,11 +14,15 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { answeredIds, questionIds } = this.props;
+    const { answeredIds, questionIds, authedUser } = this.props;
 
     const unansweredIds = questionIds.filter(f =>
       answeredIds ? !answeredIds.includes(f) : null
     );
+
+    if (!authedUser[0]) {
+      return <Redirect to="/Login" />;
+    }
 
     return (
       <Box
@@ -43,12 +48,15 @@ class Dashboard extends Component {
             />
           </Box>
         </Box>
-
-        {this.state.unanswered
-          ? unansweredIds.map((id, i) => <Question key={i} id={id} />)
-          : answeredIds
-          ? this.props.answeredIds.map((id, i) => <Question key={i} id={id} />)
-          : null}
+        <Box pad="Large" align="center" justify="center">
+          {this.state.unanswered
+            ? unansweredIds.map((id, i) => <Question key={i} id={id} />)
+            : answeredIds
+            ? this.props.answeredIds.map((id, i) => (
+                <Question key={i} id={id} />
+              ))
+            : null}
+        </Box>
       </Box>
     );
   }
@@ -62,6 +70,7 @@ function mapStateToProps({ users, questions, authedUser }) {
     : null;
 
   return {
+    authedUser,
     answeredIds: answeredIds,
     unansweredIds: allIds,
     users,

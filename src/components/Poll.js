@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Box, Button, Text } from "grommet";
-import { Link, Redirect, withRouter } from "react-router-dom";
+import { Box, Button, Text, Heading } from "grommet";
+import { Redirect, withRouter } from "react-router-dom";
 
 import { handleSaveQuestionAnswer } from "../actions/questions";
-import { formatQuestion, formatDate } from "../utils/helpers";
+import { formatDate } from "../utils/helpers";
 
 class Poll extends Component {
   state = {};
@@ -17,7 +17,18 @@ class Poll extends Component {
   };
 
   render() {
-    const { question, user, authedUser } = this.props;
+    const { questions, users, authedUser, id } = this.props;
+    // if (!authedUser[0]) {
+    //   return <Redirect to="/Login" />;
+    // }
+
+    if (questions[id] === undefined) {
+      return <Redirect to="/404" />;
+    }
+
+    const question = questions && questions[id];
+    const user = users && users[question.author];
+
     const { timestamp, optionOne, optionTwo } = question;
     const { name, avatarURL } = user;
 
@@ -44,45 +55,52 @@ class Poll extends Component {
     }
 
     return (
-      <Box
-        direction="row"
-        border={{ color: "brand", size: "large" }}
-        pad="medium"
-        background="brand"
-        elevation="medium"
-        animation="fadeIn"
-        margin="small"
-      >
-        <Box direction="column" className="credentials">
-          <img src={avatarURL} alt={`Avatar of ${name}`} className="avatar" />
-          <span>{name}</span>
-          <div>{formatDate(timestamp)}</div>
-        </Box>
+      <Box pad="Large" align="center" justify="center">
+        <Heading alignSelf="center" margin="small">
+          Would you rather?
+        </Heading>
+        <Box
+          direction="row"
+          border={{ color: "brand", size: "small" }}
+          pad="medium"
+          elevation="medium"
+          animation="fadeIn"
+          fill={false}
+          round="small"
+          margin="medium"
+          width="large"
+        >
+          <Box direction="column" className="credentials">
+            <img src={avatarURL} alt={`Avatar of ${name}`} className="avatar" />
+            <span>{name}</span>
+            <div>{formatDate(timestamp)}</div>
+          </Box>
 
-        <Box flex direction="row" align="center" pad="medium">
-          <Box>
-            <Button
-              label={optionOne.text}
-              primary={selectedQuestion === "optionOne"}
-              onClick={() => this.handleClick(question, "optionOne")}
-            />
-            {!newQuestion ? null : (
-              <Text>
-                {question.optionOne.votes.length} / {votes} |
-              </Text>
-            )}
+          <Box flex direction="row" align="center" pad="medium">
+            <Box>
+              <Button
+                label={optionOne.text}
+                primary={selectedQuestion === "optionOne"}
+                onClick={() => this.handleClick(question, "optionOne")}
+              />
+              {!newQuestion ? null : (
+                <Text>
+                  {question.optionOne.votes.length} / {votes} |
+                </Text>
+              )}
 
-            <Button
-              label={optionTwo.text}
-              primary={selectedQuestion === "optionTwo"}
-              onClick={() => this.handleClick(question, "optionTwo")}
-            />
+              <Button
+                label={optionTwo.text}
+                primary={selectedQuestion === "optionTwo"}
+                onClick={() => this.handleClick(question, "optionTwo")}
+              />
 
-            {!newQuestion ? null : (
-              <Text>
-                {question.optionTwo.votes.length} / {votes} |
-              </Text>
-            )}
+              {!newQuestion ? null : (
+                <Text>
+                  {question.optionTwo.votes.length} / {votes} |
+                </Text>
+              )}
+            </Box>
           </Box>
         </Box>
       </Box>
@@ -92,14 +110,12 @@ class Poll extends Component {
 
 function mapStateToProps({ users, questions, authedUser }, props) {
   const { id } = props.match.params;
-  const question = questions && questions[id];
-  const user = users && users[question.author];
 
   return {
     id,
     authedUser,
-    question,
-    user
+    questions,
+    users
   };
 }
 
