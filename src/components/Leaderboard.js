@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Box, Text, Heading, TextInput } from "grommet";
-import { withRouter } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 
 class Leaderboard extends Component {
   render() {
@@ -65,7 +65,7 @@ class Leaderboard extends Component {
   }
 }
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ users, authedUser }) {
   const usersSorted = Object.values(users).sort(
     (a, b) =>
       Object.keys(b.answers).length +
@@ -74,7 +74,8 @@ function mapStateToProps({ users }) {
   );
 
   return {
-    usersSorted
+    usersSorted,
+    authedUser
   };
 }
 

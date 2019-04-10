@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Box, Button } from "grommet";
-import { Link, withRouter } from "react-router-dom";
+import { Redirect, Link, withRouter } from "react-router-dom";
 
 import { handleSaveQuestionAnswer } from "../actions/questions";
 import { formatQuestion, formatDate } from "../utils/helpers";
@@ -18,10 +18,6 @@ class Question extends Component {
     const { question, poll, user } = this.props;
     const { timestamp, optionOne, optionTwo, id } = question;
     const { name, avatarURL } = user;
-
-    if (question === null) {
-      return <p>This Question doesn't exist</p>;
-    }
 
     return (
       <Link to={`/poll/${id}`}>

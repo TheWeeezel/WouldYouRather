@@ -43,8 +43,6 @@ class Poll extends Component {
       return <p>This Question doesn't exist</p>;
     }
 
-    if (!question) return <Redirect to="/404" />;
-
     return (
       <Box
         direction="row"
@@ -95,7 +93,6 @@ class Poll extends Component {
 function mapStateToProps({ users, questions, authedUser }, props) {
   const { id } = props.match.params;
   const question = questions && questions[id];
-  console.log("Id:", questions);
   const user = users && users[question.author];
 
   return {

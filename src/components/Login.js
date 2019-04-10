@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Box, Button, Heading, Select } from "grommet";
-import { withRouter } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 
 import { handleAuthedUser } from "../actions/authedUser";
+import authedUser from "../reducers/authedUser";
 
 class Login extends Component {
   state = {
@@ -11,13 +12,16 @@ class Login extends Component {
   };
 
   handleSubmit() {
+    const { dispatch } = this.props;
     const { user } = this.state;
-    handleAuthedUser(user.option);
+    dispatch(handleAuthedUser(user.option));
   }
 
   render() {
-    const { users } = this.props;
+    const { users, authedUser } = this.props;
     const selectUsers = users.map(u => u.id);
+    console.log("authed:", authedUser);
+    if (authedUser && authedUser === {}) return <Redirect to="/" />;
     return (
       <Box
         flex
@@ -51,8 +55,9 @@ class Login extends Component {
     );
   }
 }
-function mapStateToProps({ users, questions, authedUser }, { id }) {
+function mapStateToProps({ users, authedUser }) {
   return {
+    authedUser,
     users: Object.values(users)
   };
 }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Grommet, Box } from "grommet";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Redirect, BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { handleInitialData } from "../actions/shared";
 import LoadingBar from "react-redux-loading";
