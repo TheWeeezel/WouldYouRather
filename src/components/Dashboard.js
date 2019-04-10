@@ -20,26 +20,35 @@ class Dashboard extends Component {
     );
 
     return (
-      <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
-        <Box flex align="center" justify="center">
-          <Heading level="3" margin="none">
+      <Box
+        direction="column"
+        flex
+        justify="center"
+        overflow={{ horizontal: "hidden" }}
+      >
+        <Box align="center">
+          <Heading alignSelf="center" margin="small">
             Would you rather?
           </Heading>
-          <Box flex direction="row" align="center" pad="medium">
-            <Button label="Unanswered" onClick={() => this.handleClick(true)} />
-            <Button label="Answered" onClick={() => this.handleClick(false)} />
+          <Box flex direction="row">
+            <Button
+              primary={this.state.unanswered}
+              label="Unanswered"
+              onClick={() => this.handleClick(true)}
+            />
+            <Button
+              primary={!this.state.unanswered}
+              label="Answered"
+              onClick={() => this.handleClick(false)}
+            />
           </Box>
-
-          <div>
-            {this.state.unanswered
-              ? unansweredIds.map((id, i) => <Question key={i} id={id} />)
-              : answeredIds
-              ? this.props.answeredIds.map((id, i) => (
-                  <Question key={i} id={id} />
-                ))
-              : null}
-          </div>
         </Box>
+
+        {this.state.unanswered
+          ? unansweredIds.map((id, i) => <Question key={i} id={id} />)
+          : answeredIds
+          ? this.props.answeredIds.map((id, i) => <Question key={i} id={id} />)
+          : null}
       </Box>
     );
   }

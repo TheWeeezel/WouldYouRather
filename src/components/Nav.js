@@ -1,21 +1,25 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React from "react";
+import { Box, Button, Heading, TextInput } from "grommet";
+import { NavLink } from "react-router-dom";
 
-export default function Nav () {
+export default function Nav() {
   return (
-    <nav className='nav'>
-      <ul>
-        <li>
-          <NavLink to='/' exact activeClassName='active'>
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/new' activeClassName='active'>
-            New Tweet
-          </NavLink>
-        </li>
-      </ul>
-    </nav>
-  )
-} 
+    <Box flex direction="row" pad="medium">
+      <Box pad="medium">
+        <NavLink to="/" exact activeClassName="active">
+          Home
+        </NavLink>
+      </Box>
+      <Box pad="medium">
+        <NavLink to="/new" activeClassName="active">
+          New Question
+        </NavLink>
+      </Box>
+      <Box pad="medium">
+        <NavLink to="/leaderboard" activeClassName="active">
+          Leaderboard
+        </NavLink>
+      </Box>
+    </Box>
+  );
+}

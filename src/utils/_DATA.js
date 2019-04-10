@@ -182,9 +182,6 @@ export function _saveQuestion(question) {
 }
 
 export function _saveQuestionAnswer({ authedUser, qid, answer }) {
-  console.log("Authed: ", authedUser);
-  console.log("QID: ", qid);
-  console.log("answer: ", answer);
   return new Promise((res, rej) => {
     setTimeout(() => {
       users = {
@@ -207,7 +204,7 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
             votes: questions[qid][answer].votes.concat([authedUser])
           }
         }
-      }
+      };
 
       res();
     }, 500);

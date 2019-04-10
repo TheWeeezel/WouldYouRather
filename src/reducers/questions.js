@@ -1,6 +1,7 @@
 import {
   RECEIVE_QUESTIONS,
-  ANSWER_QUESTION_SUCCESS
+  ANSWER_QUESTION_SUCCESS,
+  SAVE_QUESTION_SUCCESS
 } from "../actions/questions";
 
 export default function(state = {}, action) {
@@ -11,17 +12,44 @@ export default function(state = {}, action) {
         ...action.questions
       };
     case ANSWER_QUESTION_SUCCESS:
-      return Object.assign({}, state, {
-        users: {
-          ...state.users,
-          [action.payload.authedUser]: {
-            ...state.users[action.payload.authedUser],
-            answers: {
-              [action.payload.qid]: action.payload.answer
-            }
+      const { authedUser, qid, answer } = action.payload;
+      const question = state[qid];
+
+      question.optionOne.votes = question.optionOne.votes.filter(
+        user => user !== authedUser
+      );
+      question.optionTwo.votes = question.optionTwo.votes.filter(
+        user => user !== authedUser
+      );
+      
+      return {
+        ...state,
+        [qid]: {
+          ...question,
+          [answer]: {
+            ...question[answer],
+            votes: [...new Set([...question[answer].votes, authedUser])]
           }
         }
-      });
+      };
+    case SAVE_QUESTION_SUCCESS:
+      const { id, author, optionOneText, optionTwoText } = action.payload;
+      return {
+        ...state,
+        [id]: {
+          id: id,
+          author: author,
+          optionOne: {
+            votes: [],
+            text: optionOneText
+          },
+          optionTwo: {
+            votes: [],
+            text: optionTwoText
+          },
+          timestamp: Date.now()
+        }
+      };
     default:
       return state;
   }

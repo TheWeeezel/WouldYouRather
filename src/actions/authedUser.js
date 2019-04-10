@@ -1,8 +1,18 @@
-export const SET_AUTHED_USER = 'SET_AUTHED_USER'
+import { showLoading, hideLoading } from "react-redux-loading";
 
-export function setAuthedUser (id) {
+export const SET_AUTHED_USER = "SET_AUTHED_USER";
+
+export function setAuthedUser(id) {
   return {
     type: SET_AUTHED_USER,
-    id,
-  }
+    id
+  };
+}
+
+export function handleAuthedUser(user) {
+  return dispatch => {
+    dispatch(showLoading());
+    dispatch(setAuthedUser(user));
+    dispatch(hideLoading());
+  };
 }

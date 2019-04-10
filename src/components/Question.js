@@ -24,15 +24,16 @@ class Question extends Component {
     }
 
     return (
-      <Link to={`/question/${id}`}>
+      <Link to={`/poll/${id}`}>
         <Box
           direction="row"
-          border={{ color: "brand", size: "large" }}
+          border={{ color: "brand", size: "small" }}
           pad="medium"
-          background="brand"
           elevation="medium"
           animation="fadeIn"
-          margin="small"
+          fill={false}
+          round="small"
+          margin="medium"
         >
           <Box direction="column" className="credentials">
             <img src={avatarURL} alt={`Avatar of ${name}`} className="avatar" />
@@ -40,29 +41,10 @@ class Question extends Component {
             <div>{formatDate(timestamp)}</div>
           </Box>
 
-          {poll ? (
-            <Box flex direction="row" align="center" pad="medium">
-              <Box>
-                <Button
-                  label={optionOne.text}
-                  onClick={() => this.handleClick(question, "optionOne")}
-                />
-                Stats
-              </Box>
-              <Box>
-                <Button
-                  label={optionTwo.text}
-                  onClick={() => this.handleClick(question, "optionTwo")}
-                />
-                Stats
-              </Box>
-            </Box>
-          ) : (
-            <div className="question-preview">
-              <div>{optionOne.text}</div>
-              <div>{optionTwo.text}</div>
-            </div>
-          )}
+          <div className="question-preview">
+            <div>{optionOne.text}</div>
+            <div>{optionTwo.text}</div>
+          </div>
         </Box>
       </Link>
     );

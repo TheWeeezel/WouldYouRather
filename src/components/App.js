@@ -1,12 +1,16 @@
 import React, { Component } from "react";
-import { Grommet } from "grommet";
-import { BrowserRouter as Router } from "react-router-dom";
+import { Grommet, Box } from "grommet";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { handleInitialData } from "../actions/shared";
 import LoadingBar from "react-redux-loading";
+import Auth from "../utils/auth";
 import Nav from "./Nav";
 import Dashboard from "./Dashboard";
 import Poll from "./Poll";
+import NewQuestion from "./NewQuestion";
+import Leaderboard from "./Leaderboard";
+import Login from "./Login";
 
 class App extends Component {
   componentDidMount() {
@@ -33,9 +37,13 @@ class App extends Component {
           <div className="container">
             <Nav />
             {this.props.loading === true ? null : (
-              <div>
-                <Poll />
-              </div>
+              <Box pad="xlarge">
+                <Route path="/" exact component={Dashboard} />
+                <Route path="/login" component={Login} />
+                <Route path="/poll/:id" component={Auth(Poll)} />
+                <Route path="/new" component={NewQuestion} />
+                <Route path="/leaderboard" component={Leaderboard} />
+              </Box>
             )}
           </div>
         </Grommet>
