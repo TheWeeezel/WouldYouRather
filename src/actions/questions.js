@@ -3,13 +3,15 @@ import {
   answerQuestionSuccessUser,
   saveQuestionSuccessUser
 } from "../actions/users";
+import { push } from "connected-react-router";
 import { showLoading, hideLoading } from "react-redux-loading";
-
-export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
-export const ADD_ANSWER = "ADD_ANSWER";
-export const ANSWER_QUESTION_SUCCESS = "ANSWER_QUESTION_SUCCESS";
-export const ANSWER_QUESTION_FAIL = "ANSWER_QUESTION_FAIL";
-export const SAVE_QUESTION_SUCCESS = "SAVE_QUESTION_SUCCESS";
+import {
+  RECEIVE_QUESTIONS,
+  ADD_ANSWER,
+  ANSWER_QUESTION_SUCCESS,
+  ANSWER_QUESTION_FAIL,
+  SAVE_QUESTION_SUCCESS
+} from "./types";
 
 export function receiveQuestions(questions) {
   return {
@@ -75,6 +77,7 @@ export function handleSaveQuestion(optionOneText, optionTwoText, id) {
     return _saveQuestion(payload)
       .then(() => dispatch(saveQuestionSuccess(payload)))
       .then(() => dispatch(saveQuestionSuccessUser(payload)))
+      .then(() => dispatch(push("/")))
       .then(() => dispatch(hideLoading()))
       .catch(() =>
         dispatch(answerQuestionFailure(console.log("Something went wrong")))

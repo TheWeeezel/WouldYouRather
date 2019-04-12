@@ -2,7 +2,7 @@ import {
   RECEIVE_QUESTIONS,
   ANSWER_QUESTION_SUCCESS,
   SAVE_QUESTION_SUCCESS
-} from "../actions/questions";
+} from "../actions/types";
 
 export default function(state = {}, action) {
   switch (action.type) {
@@ -21,7 +21,7 @@ export default function(state = {}, action) {
       question.optionTwo.votes = question.optionTwo.votes.filter(
         user => user !== authedUser
       );
-      
+
       return {
         ...state,
         [qid]: {

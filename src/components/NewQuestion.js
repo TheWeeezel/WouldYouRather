@@ -27,8 +27,9 @@ class NewQuestion extends Component {
     const { dispatch } = this.props;
     const { optionOneText, optionTwoText } = this.state;
     dispatch(handleSaveQuestion(optionOneText, optionTwoText, id));
-    event.preventDefault();
   };
+
+
 
   render() {
     const { authedUser } = this.props;

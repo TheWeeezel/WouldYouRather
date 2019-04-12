@@ -22,7 +22,7 @@ class Nav extends Component {
             </NavLink>
           </Box>
           <Box pad="medium">
-            <NavLink to="/new" style={{ textDecoration: "none" }}>
+            <NavLink to="/add" style={{ textDecoration: "none" }}>
               <Anchor href="#" size="medium" primary label="New Question" />
             </NavLink>
           </Box>

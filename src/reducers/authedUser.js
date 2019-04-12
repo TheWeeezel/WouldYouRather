@@ -1,4 +1,4 @@
-import { SET_AUTHED_USER, REMOVE_AUTHED_USER } from "../actions/authedUser.js";
+import { SET_AUTHED_USER, REMOVE_AUTHED_USER } from "../actions/types.js";
 
 export default function authedUser(state = {}, action) {
   switch (action.type) {

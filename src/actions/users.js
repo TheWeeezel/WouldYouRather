@@ -1,6 +1,8 @@
-export const RECEIVE_USERS = "RECEIVE_USERS";
-export const ANSWER_QUESTION_SUCCESS_USER = "ANSWER_QUESTION_SUCCESS_USER";
-export const SAVE_QUESTION_SUCCESS_USER = "SAVE_QUESTION_SUCCESS_USER";
+import {
+  RECEIVE_USERS,
+  ANSWER_QUESTION_SUCCESS_USER,
+  SAVE_QUESTION_SUCCESS_USER
+} from "./types";
 
 export function receiveUsers(users) {
   return {

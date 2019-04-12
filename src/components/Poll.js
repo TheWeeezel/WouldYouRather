@@ -11,8 +11,8 @@ class Poll extends Component {
 
   handleClick = (question, answer) => {
     const { dispatch } = this.props;
-    // console.log("Question: ", question);
-    // console.log("Question: ", answer);
+    console.log("Question: ", question);
+    console.log("Question: ", answer);
     dispatch(handleSaveQuestionAnswer(question, answer));
   };
 

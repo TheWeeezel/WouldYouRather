@@ -2,7 +2,7 @@ import {
   RECEIVE_USERS,
   ANSWER_QUESTION_SUCCESS_USER,
   SAVE_QUESTION_SUCCESS_USER
-} from "../actions/users";
+} from "../actions/types";
 
 export default function users(state = {}, action) {
   switch (action.type) {

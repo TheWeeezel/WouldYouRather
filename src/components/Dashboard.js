@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Box, Button, Heading, Grommet } from "grommet";
 import Question from "./Question";
 import { Redirect } from "react-router-dom";
-
 class Dashboard extends Component {
   state = {
     unanswered: true
