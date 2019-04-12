@@ -32,6 +32,8 @@ You will also see any lint errors in the console.
     
     This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# Contributors
+The Help of the Mentors at Udacity
 
-# Licencing
-The MIT License (MIT)
+# License
+[The MIT License (MIT)](https://github.com/TheWeeezel/WouldYouRather/blob/master/LICENSE)
