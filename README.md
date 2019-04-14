@@ -31,3 +31,9 @@ You will also see any lint errors in the console.
     "styled-components": "^4.2.0"
     
     This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+# Contributors
+The Help of the Mentors at Udacity
+
+# License
+[The MIT License (MIT)](https://github.com/TheWeeezel/WouldYouRather/blob/master/LICENSE)
