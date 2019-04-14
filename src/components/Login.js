@@ -13,7 +13,7 @@ class Login extends Component {
   handleSubmit() {
     const { dispatch } = this.props;
     const { user } = this.state;
-    dispatch(handleAuthedUser(user.option));
+    dispatch(handleAuthedUser(user));
   }
 
   render() {
@@ -23,7 +23,7 @@ class Login extends Component {
     if (authedUser[0]) {
       return <Redirect to="/" />;
     }
-
+  
     return (
       <Box align="center" flex justify="center">
         <Box
@@ -44,7 +44,7 @@ class Login extends Component {
             <Select
               options={selectUsers}
               value={this.state.user}
-              onChange={option => this.setState({ user: option })}
+              onChange={option => this.setState({ user: option.value })}
             />
 
             <Button

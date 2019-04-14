@@ -18,17 +18,17 @@ class Nav extends Component {
         <Box flex direction="row">
           <Box pad="medium">
             <NavLink to="/" exact style={{ textDecoration: "none" }}>
-              <Anchor href="#" size="medium" primary label="Home" />
+              <Text>Home</Text>
             </NavLink>
           </Box>
           <Box pad="medium">
             <NavLink to="/add" style={{ textDecoration: "none" }}>
-              <Anchor href="#" size="medium" primary label="New Question" />
+              <Text>New Question</Text>
             </NavLink>
           </Box>
           <Box pad="medium">
             <NavLink to="/leaderboard" style={{ textDecoration: "none" }}>
-              <Anchor href="#" size="medium" primary label="Leaderboard" />
+              <Text>Leaderboard</Text>
             </NavLink>
           </Box>
         </Box>

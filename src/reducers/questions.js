@@ -33,7 +33,8 @@ export default function(state = {}, action) {
         }
       };
     case SAVE_QUESTION_SUCCESS:
-      const { id, author, optionOneText, optionTwoText } = action.payload;
+      console.log("Action: ", action);
+      const { author, id, optionOne, optionTwo, timestamp } = action.payload;
       return {
         ...state,
         [id]: {
@@ -41,13 +42,13 @@ export default function(state = {}, action) {
           author: author,
           optionOne: {
             votes: [],
-            text: optionOneText
+            text: optionOne.text
           },
           optionTwo: {
             votes: [],
-            text: optionTwoText
+            text: optionTwo.text
           },
-          timestamp: Date.now()
+          timestamp: timestamp
         }
       };
     default:

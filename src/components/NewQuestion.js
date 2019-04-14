@@ -23,13 +23,11 @@ class NewQuestion extends Component {
   }
 
   handleSubmit = event => {
-    const id = this.generateUID();
+    // const id = this.generateUID();
     const { dispatch } = this.props;
     const { optionOneText, optionTwoText } = this.state;
-    dispatch(handleSaveQuestion(optionOneText, optionTwoText, id));
+    dispatch(handleSaveQuestion({optionOneText, optionTwoText}));
   };
-
-
 
   render() {
     const { authedUser } = this.props;
@@ -56,14 +54,12 @@ class NewQuestion extends Component {
             <TextInput
               size="medium"
               type="text"
-              value={this.state.optionOneText}
               placeholder="... that"
               onChange={e => this.setState({ optionOneText: e.target.value })}
             />
             <TextInput
               size="medium"
               type="text"
-              value={this.state.optionTwoText}
               placeholder="... this"
               onChange={e => this.setState({ optionTwoText: e.target.value })}
             />

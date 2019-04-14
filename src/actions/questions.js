@@ -1,4 +1,4 @@
-import { _saveQuestionAnswer, _saveQuestion } from "../utils/_DATA";
+import { saveQuestionAnswer, saveQuestion } from "../utils/api";
 import {
   answerQuestionSuccessUser,
   saveQuestionSuccessUser
@@ -52,7 +52,7 @@ export function handleSaveQuestionAnswer(question, answer) {
 
     dispatch(showLoading());
 
-    return _saveQuestionAnswer(payload)
+    return saveQuestionAnswer(payload)
       .then(() => dispatch(answerQuestionSuccess(payload)))
       .then(() => dispatch(answerQuestionSuccessUser(payload)))
       .then(() => dispatch(hideLoading()))
@@ -62,21 +62,15 @@ export function handleSaveQuestionAnswer(question, answer) {
   };
 }
 
-export function handleSaveQuestion(optionOneText, optionTwoText, id) {
+export function handleSaveQuestion(question) {
   return (dispatch, getState) => {
     const { authedUser } = getState();
-    const payload = {
-      optionOneText,
-      optionTwoText,
-      id,
-      author: authedUser
-    };
-
+    let { users } = getState();
     dispatch(showLoading());
 
-    return _saveQuestion(payload)
-      .then(() => dispatch(saveQuestionSuccess(payload)))
-      .then(() => dispatch(saveQuestionSuccessUser(payload)))
+    return saveQuestion({ ...question, author: authedUser })
+      .then(question => dispatch(saveQuestionSuccess(question)))
+      .then(question => dispatch(saveQuestionSuccessUser({ users, question })))
       .then(() => dispatch(push("/")))
       .then(() => dispatch(hideLoading()))
       .catch(() =>

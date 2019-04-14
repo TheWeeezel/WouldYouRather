@@ -19,6 +19,7 @@ export function answerQuestionSuccessUser(payload) {
 }
 
 export function saveQuestionSuccessUser(payload) {
+  console.log("Pay: ", payload);
   return {
     type: SAVE_QUESTION_SUCCESS_USER,
     payload

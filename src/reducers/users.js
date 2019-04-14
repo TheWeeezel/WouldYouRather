@@ -12,7 +12,6 @@ export default function users(state = {}, action) {
         ...action.users
       };
     case ANSWER_QUESTION_SUCCESS_USER: {
-      console.log("T: ", action);
       const { authedUser, qid, answer } = action.payload;
       const user = state[authedUser];
       return {
@@ -27,14 +26,15 @@ export default function users(state = {}, action) {
       };
     }
     case SAVE_QUESTION_SUCCESS_USER: {
-      const { id, author } = action.payload;
-      const user = state[author];
+      const { question } = action.payload;
+      console.log("Action", action);
+      const user = state[question.payload.author];
       return {
         ...state,
-        [author]: {
+        [question.payload.author]: {
           ...user,
           questions: {
-            ...user.questions.concat(id)
+            ...user.questions.concat(question.payload.id)
           }
         }
       };
