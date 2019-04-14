@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Box, Text, Heading } from "grommet";
-import { Redirect, Link, withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import { handleSaveQuestionAnswer } from "../actions/questions";
-import { formatQuestion, formatDate } from "../utils/helpers";
+import { formatDate } from "../utils/helpers";
 
 class Question extends Component {
   handleClick = (question, answer) => {
@@ -15,7 +15,7 @@ class Question extends Component {
   };
 
   render() {
-    const { question, poll, user } = this.props;
+    const { question, user } = this.props;
     const { timestamp, optionOne, optionTwo, id } = question;
     const { name, avatarURL } = user;
 

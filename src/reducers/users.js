@@ -27,15 +27,12 @@ export default function users(state = {}, action) {
     }
     case SAVE_QUESTION_SUCCESS_USER: {
       const { question } = action.payload;
-      console.log("Action", action);
-      const user = state[question.payload.author];
+      const user = question.payload.author;
       return {
         ...state,
-        [question.payload.author]: {
-          ...user,
-          questions: {
-            ...user.questions.concat(question.payload.id)
-          }
+        [user]: {
+          ...state[user],
+          questions: [...state[user].questions.concat(question.payload.id)]
         }
       };
     }

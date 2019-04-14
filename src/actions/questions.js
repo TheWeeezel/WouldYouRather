@@ -7,7 +7,6 @@ import { push } from "connected-react-router";
 import { showLoading, hideLoading } from "react-redux-loading";
 import {
   RECEIVE_QUESTIONS,
-  ADD_ANSWER,
   ANSWER_QUESTION_SUCCESS,
   ANSWER_QUESTION_FAIL,
   SAVE_QUESTION_SUCCESS

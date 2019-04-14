@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Box, Text, Heading, TextInput } from "grommet";
+import { Box, Text, Heading } from "grommet";
 import { Redirect, withRouter } from "react-router-dom";
 
 class Leaderboard extends Component {

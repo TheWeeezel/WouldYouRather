@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Box, Button, Heading, Grommet } from "grommet";
+import { Box, Button, Heading } from "grommet";
 import Question from "./Question";
 import { Redirect } from "react-router-dom";
 class Dashboard extends Component {
